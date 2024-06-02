@@ -19,13 +19,18 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + "/views/index.html");
 });
 
+app.use(express.json());
 // your first API endpoint...
 app.get("/api/hello", function (req, res) {
   res.json({ greeting: "hello API" });
 });
 
 app.get("/api/whoami", (req, res) => {
-  console.log(req.headers);
+  const ipaddress = "192.168.8.100";
+  const software = req.headers["user-agent"];
+  const language = req.headers["accept-language"];
+
+  res.json({ ipaddress, software, language });
 });
 
 // listen for requests :)
